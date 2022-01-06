@@ -1,7 +1,8 @@
+import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'dart:math';
+
 
 void main() {
   runApp(MyApp());
@@ -79,7 +80,7 @@ class HomePage extends StatelessWidget {
                   text: TextSpan(
                       text: 'First GetX',
                       recognizer: TapGestureRecognizer()
-                        ..onTap = ()=> null,
+                        ..onTap = ()=> Get.to(()=>PageOne()),
                       style: TextStyle(
                           color: Colors.grey.shade600,
                           fontSize: 30
@@ -91,7 +92,9 @@ class HomePage extends StatelessWidget {
                   text:TextSpan(
                       text: 'Explore GetX',
                       recognizer: TapGestureRecognizer()
-                        ..onTap = ()=> null,
+                        ..onTap = ()=> Get.to(()=>PageTwo(),
+                        arguments: {'price':Random().nextInt(10000).toString(),
+                        'text':'The course price in USD'}),
                       style: TextStyle(
                           color: Colors.grey.shade600,
                           fontSize: 30
@@ -208,7 +211,7 @@ class PageOne extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),),
-            onPressed: () => null,
+            onPressed: () => Get.back(),
             child: Text(
               "Home",
               style: TextStyle(
@@ -242,7 +245,12 @@ class PageTwo extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
+            Text(
+              Get.arguments['price']?? 'Exploration Page'
+            ),
+            Text(
+                Get.arguments['text']?? 'Nothing to show'
+            )
           ],
 
         ),
