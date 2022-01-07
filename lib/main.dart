@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'DBestech',
       theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: HomePage(),
+      getPages: [
+        GetPage(name: '/course-page', page: ()=>PageThree())
+      ],
     );
   }
 }
@@ -138,7 +141,9 @@ class HomePage extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
                             ),),
-                          onPressed: () => null,
+                          onPressed: () => Get.toNamed('/course-page',arguments: {
+                            'price':Random().nextInt(10000).toString()
+                          }),
                           child: Text(
                             "Course",
                             style: TextStyle(
@@ -278,7 +283,7 @@ class PageThree extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          "Course price is USD ",
+          "Course price is USD "+Get.arguments['price']??'0',
           style: TextStyle(fontSize: 30, color:Colors.grey.shade600),
         ),
       ),
