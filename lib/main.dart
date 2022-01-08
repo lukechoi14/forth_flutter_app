@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
-      title: 'DBestech',
+      title: 'GetX',
       theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: HomePage(),
       getPages: [
-        GetPage(name: '/course-page', page: ()=>PageThree())
+        GetPage(name: '/course-page', page: ()=>PageThree()),
+        GetPage(name: '/more-page/:data', page: ()=>PageFour())
       ],
     );
   }
@@ -172,7 +173,7 @@ class HomePage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),),
-                              onPressed: () => null,
+                              onPressed: () => Get.toNamed('/more-page/${Random().nextInt(1000)}'),
                               child: Text(
                                 "More",
                                 style: TextStyle(
@@ -315,15 +316,15 @@ class PageFour extends StatelessWidget {
                 elevation: 0,
                 primary: Colors.transparent,
               ),
-              onPressed: () => null,
+              onPressed: () => Get.to(()=>PageFive()),
               child: Text(
-                "Go to another page",
+                "Go to Home",
                 style: TextStyle(fontSize: 40, color:Colors.grey),
               ),
             ),
             Divider(),
             Text(
-              'Page Four',
+              'Page Four' + Get.parameters['data']!,
               style: TextStyle(fontSize: 30),
             ),
           ],
@@ -336,6 +337,10 @@ class PageFive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Page Five"
+        ),
+      ),
       body: Center(
           child:Container(
             width: 200,
@@ -354,7 +359,7 @@ class PageFive extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),),
-              onPressed: () => null,
+              onPressed: () => Get.to(()=>HomePage()),
               child: Text(
                 "Home",
                 style: TextStyle(
